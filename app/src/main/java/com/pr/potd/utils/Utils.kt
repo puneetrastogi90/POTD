@@ -12,7 +12,9 @@ const val UI_DATE_FORMAT = "MM/dd/yyyy"
 
 
 internal fun convertMillisToDate(dateFormat: String, dateInMilliseconds: Long): String {
-    return DateFormat.format(dateFormat, dateInMilliseconds).toString()
+    val sdf = SimpleDateFormat(dateFormat)
+    val date = Date(dateInMilliseconds)
+    return sdf.format(date).toString()
 }
 
 internal fun convertDateToMillis(dateFormat: String, dateInString: String): Long {

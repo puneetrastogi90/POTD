@@ -14,7 +14,6 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
 
-
     @Provides
     fun providesPotdRepository(
         remoteDataSource: NetworkDataSource,

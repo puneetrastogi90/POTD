@@ -62,7 +62,6 @@ internal class MainViewmodel @Inject constructor(val potdRepository: PotdReposit
                 is DatabaseResult.DataBaseError -> {
                     MainState.ToggleFavoriteFailed(response.errorBody)
                 }
-
             }
         }
     }
