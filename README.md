@@ -27,6 +27,8 @@ targetSdkVersion = 33
 - Dark mode support
 - Portrait/Landscape Orientation Support
 
+(Unit tests are also added for the Repository)
+
 
 
 
