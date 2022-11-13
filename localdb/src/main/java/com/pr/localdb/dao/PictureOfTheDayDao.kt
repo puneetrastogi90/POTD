@@ -1,7 +1,7 @@
-package com.pr.potd.database.dataobjects
+package com.pr.localdb.dao
 
 import androidx.room.*
-import com.pr.potd.database.dataobjects.entities.PotdEntity
+import com.pr.localdb.entities.PotdEntity
 
 @Dao
 interface PictureOfTheDayDao {

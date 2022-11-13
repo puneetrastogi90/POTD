@@ -1,7 +1,7 @@
-package com.pr.potd.database.local
+package com.pr.localdb
 
-import com.pr.potd.database.dataobjects.PictureOfTheDayDao
-import com.pr.potd.database.dataobjects.entities.PotdEntity
+import com.pr.localdb.dao.PictureOfTheDayDao
+import com.pr.localdb.entities.PotdEntity
 import javax.inject.Inject
 
 class RoomLocalDataSourceImpl @Inject constructor(private val pictureOfTheDayDao: PictureOfTheDayDao) :

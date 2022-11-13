@@ -1,6 +1,6 @@
-package com.pr.potd.database.local
+package com.pr.localdb
 
-import com.pr.potd.database.dataobjects.entities.PotdEntity
+import com.pr.localdb.entities.PotdEntity
 
 interface LocalDataSource {
 

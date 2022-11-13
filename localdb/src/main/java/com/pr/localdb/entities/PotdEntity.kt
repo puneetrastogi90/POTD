@@ -1,4 +1,4 @@
-package com.pr.potd.database.dataobjects.entities
+package com.pr.localdb.entities
 
 import androidx.room.Entity
 import androidx.room.Index
