@@ -4,6 +4,10 @@ import com.pr.network.NetworkDataSource
 import com.pr.potd.network.data.PotdResponse
 import com.pr.potd.network.data.Result
 
+/**
+ * This is a dummy implementation of response from the network
+ *
+ */
 internal class TestNetworkDataSourceImpl : NetworkDataSource {
 
     override suspend fun fetchNasaPotd(date: String): Result<PotdResponse, String> {

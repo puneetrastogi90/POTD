@@ -4,7 +4,7 @@ import com.pr.localdb.entities.DatabaseResult
 import com.pr.localdb.entities.PotdEntity
 import com.pr.potd.network.data.Result
 
-interface PotdRepository {
+internal interface PotdRepository {
 
     suspend fun getPOTD(date: String): Result<PotdEntity, String>
 

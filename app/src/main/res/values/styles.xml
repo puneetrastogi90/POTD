@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="prescriptionEdittext" parent="android:Widget.EditText">
+    <style name="dateEditText" parent="android:Widget.EditText">
         <item name="android:padding">8dp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:background">@drawable/edittext_border</item>

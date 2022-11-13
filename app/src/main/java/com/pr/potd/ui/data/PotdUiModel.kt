@@ -11,6 +11,7 @@ internal data class PotdUiModel(
     val title: String,
     val hdUrl: String?,
     val url: String,
+    val mediaType: String? = null,
     val isFavorite: Boolean = false
 ) {
 
@@ -21,6 +22,7 @@ internal data class PotdUiModel(
         title = this.title,
         hdUrl = this.hdUrl,
         url = this.url,
+        mediaType = this.mediaType,
         isFavorite = this.isFavorite
     )
 

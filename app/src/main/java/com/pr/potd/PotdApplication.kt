@@ -4,5 +4,5 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class PotdApplication: Application() {
+internal class PotdApplication: Application() {
 }

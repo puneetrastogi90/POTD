@@ -4,6 +4,10 @@ import com.pr.localdb.entities.PotdEntity
 import com.pr.potd.ui.data.PotdUiModel
 import org.junit.*
 
+/**
+ * Unit tests for utility functions.
+ *
+ */
 internal class UtilsKtTest {
 
     @Test

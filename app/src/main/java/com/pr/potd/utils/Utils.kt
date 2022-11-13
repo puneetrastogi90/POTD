@@ -1,6 +1,5 @@
 package com.pr.potd.utils
 
-import android.text.format.DateFormat
 import com.pr.localdb.entities.PotdEntity
 import com.pr.potd.ui.data.PotdUiModel
 import com.pr.potd.network.data.PotdResponse
@@ -33,6 +32,7 @@ internal fun PotdEntity.toPotdUiModel(): PotdUiModel {
         title = this.title,
         hdUrl = this.hdUrl,
         url = this.url,
+        mediaType = this.mediaType,
         isFavorite = this.isFavorite
     )
 }
@@ -44,6 +44,7 @@ internal fun PotdResponse.toPotdEntity(): PotdEntity {
         explanation = this.explanation,
         title = this.title,
         hdUrl = this.hdUrl,
+        mediaType = this.mediaType,
         url = this.url
     )
 }

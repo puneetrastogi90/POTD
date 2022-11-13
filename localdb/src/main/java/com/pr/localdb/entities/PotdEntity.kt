@@ -12,6 +12,7 @@ data class PotdEntity(
     val title: String,
     val hdUrl: String?,
     val url: String,
+    val mediaType: String? = null,
     var isFavorite: Boolean = false
 )
 

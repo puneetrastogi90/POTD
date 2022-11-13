@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment
  * @throws IllegalStateException Exception if Fragment transaction is invalid
  */
 @Throws(ClassCastException::class, IllegalStateException::class)
-fun Fragment.addFragment(
+internal fun Fragment.addFragment(
     container: Int,
     currentFragment: Fragment,
     nextFragment: Fragment,

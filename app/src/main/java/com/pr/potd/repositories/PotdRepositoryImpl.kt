@@ -11,7 +11,7 @@ import com.pr.potd.utils.convertDateToMillis
 import com.pr.potd.utils.toPotdEntity
 import javax.inject.Inject
 
-class PotdRepositoryImpl @Inject constructor(
+internal class PotdRepositoryImpl @Inject constructor(
     val networkDataSource: NetworkDataSource,
     val localDataSource: LocalDataSource
 ) :
@@ -24,7 +24,7 @@ class PotdRepositoryImpl @Inject constructor(
                 val potdEntity = result.body?.toPotdEntity()
                 potdEntity?.let { pd: PotdEntity ->
                     localDataSource.insertPictureOfTheDay(pd)
-                    return@let Result.Success(localDataSource.getPictureOfTheDay(potdEntity?.date))
+                    return Result.Success(localDataSource.getPictureOfTheDay(potdEntity?.date))
                 }
 
                 return Result.Success(potdEntity)

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
 @Throws(IllegalStateException::class)
-fun AppCompatActivity.addFragment(
+internal fun AppCompatActivity.addFragment(
     fragmentContainerResourceId: Int,
     currentFragment: Fragment?,
     nextFragment: Fragment?,
@@ -41,17 +41,19 @@ fun AppCompatActivity.addFragment(
 
 
 @Throws(IllegalStateException::class)
-fun AppCompatActivity.replaceFragment(
+internal fun AppCompatActivity.replaceFragment(
     fragmentContainerResourceId: Int,
     supportFragmentManager: FragmentManager?,
     nextFragment: Fragment?,
-    commitAllowingStateLoss: Boolean
+    commitAllowingStateLoss: Boolean,
+    addTobackStack: Boolean = true
 ): Boolean {
     if (nextFragment == null || supportFragmentManager == null) {
         return false
     }
     val fragmentTransaction = supportFragmentManager.beginTransaction()
-
+    if (addTobackStack)
+        fragmentTransaction.addToBackStack(nextFragment.javaClass.simpleName)
     fragmentTransaction.replace(
         fragmentContainerResourceId,
         nextFragment,

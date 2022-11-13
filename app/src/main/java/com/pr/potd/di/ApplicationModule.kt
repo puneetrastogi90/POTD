@@ -12,7 +12,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ApplicationModule {
+internal class ApplicationModule {
 
     @Provides
     fun providesPotdRepository(
