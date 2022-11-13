@@ -4,19 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pr.potd.ui.data.PotdUiModel
 import com.pr.potd.databinding.FragmentFavoritesListBinding
 import com.pr.potd.intent.FavoritesIntent
 import com.pr.potd.state.FavoritesScreenUiState
+import com.pr.potd.ui.data.PotdUiModel
+import com.pr.potd.ui.viewmodels.FavoritesListViewmodel
 import com.pr.potd.utils.displayProgressBar
 import com.pr.potd.utils.showToast
-import com.pr.potd.ui.viewmodels.FavoritesListViewmodel
-import com.pr.potd.ui.viewmodels.MainViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -33,6 +32,7 @@ internal class FavoritesListFragment : Fragment(), AdapterInteractionListener {
     ): View? {
 
         binding = FragmentFavoritesListBinding.inflate(layoutInflater, container, false)
+        (activity as AppCompatActivity?)?.supportActionBar?.title = "Favorites"
         observeViewModel()
         getFavorites()
         return binding.root
