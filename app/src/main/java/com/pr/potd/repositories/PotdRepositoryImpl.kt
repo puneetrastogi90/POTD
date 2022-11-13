@@ -1,10 +1,12 @@
 package com.pr.potd.repositories
 
-import com.pr.potd.dataobjects.entities.DatabaseResult
-import com.pr.potd.dataobjects.entities.PotdEntity
-import com.pr.potd.local.LocalDataSource
+import com.pr.potd.database.dataobjects.entities.DatabaseResult
+import com.pr.potd.database.dataobjects.entities.PotdEntity
+import com.pr.potd.database.local.LocalDataSource
 import com.pr.potd.network.NetworkDataSource
 import com.pr.potd.network.data.Result
+import com.pr.potd.utils.NETWORK_DATE_FORMAT
+import com.pr.potd.utils.convertDateToMillis
 import com.pr.potd.utils.toPotdEntity
 import javax.inject.Inject
 
@@ -18,12 +20,22 @@ class PotdRepositoryImpl @Inject constructor(
         val result = networkDataSource.fetchNasaPotd(date)
         when (result) {
             is Result.Success -> {
-                result.body?.toPotdEntity()?.let { localDataSource.insertPictureOfTheDay(it) }
-                return Result.Success(localDataSource.getPictureOfTheDay(result.body!!.date))
+                val potdEntity = result.body?.toPotdEntity()
+                potdEntity?.let {
+                    localDataSource.insertPictureOfTheDay(it)
+                    return Result.Success(localDataSource.getPictureOfTheDay(potdEntity?.date))
+                }
+
+                return Result.Success(potdEntity)
             }
 
             is Result.NetworkError -> {
-                val res = localDataSource.getPictureOfTheDay(date)
+                val res = localDataSource.getPictureOfTheDay(
+                    convertDateToMillis(
+                        NETWORK_DATE_FORMAT,
+                        date
+                    )
+                )
                 if (res == null) {
                     return result
                 } else {
@@ -32,7 +44,12 @@ class PotdRepositoryImpl @Inject constructor(
             }
 
             is Result.ApiError -> {
-                val res = localDataSource.getPictureOfTheDay(date)
+                val res = localDataSource.getPictureOfTheDay(
+                    convertDateToMillis(
+                        NETWORK_DATE_FORMAT,
+                        date
+                    )
+                )
                 if (res == null) {
                     return result
                 } else {
@@ -41,7 +58,12 @@ class PotdRepositoryImpl @Inject constructor(
             }
 
             is Result.UnknownError -> {
-                val res = localDataSource.getPictureOfTheDay(date)
+                val res = localDataSource.getPictureOfTheDay(
+                    convertDateToMillis(
+                        NETWORK_DATE_FORMAT,
+                        date
+                    )
+                )
                 if (res == null) {
                     return result
                 } else {

@@ -1,6 +1,6 @@
 package com.pr.potd.intent
 
-import com.pr.potd.data.PotdUiModel
+import com.pr.potd.ui.data.PotdUiModel
 
 internal sealed class FavoritesIntent {
 

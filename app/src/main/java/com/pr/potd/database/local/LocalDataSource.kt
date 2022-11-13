@@ -1,12 +1,12 @@
-package com.pr.potd.local
+package com.pr.potd.database.local
 
-import com.pr.potd.dataobjects.entities.PotdEntity
+import com.pr.potd.database.dataobjects.entities.PotdEntity
 
 interface LocalDataSource {
 
     fun insertPictureOfTheDay(potdEntity: PotdEntity)
 
-    fun getPictureOfTheDay(date: String): PotdEntity?
+    fun getPictureOfTheDay(date: Long): PotdEntity?
 
     fun updatePictureOftheDay(potdEntity: PotdEntity): Int
 

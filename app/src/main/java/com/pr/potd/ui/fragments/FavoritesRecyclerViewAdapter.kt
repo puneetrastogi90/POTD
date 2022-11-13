@@ -3,10 +3,9 @@ package com.pr.potd.ui.fragments
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.pr.potd.R
-import com.pr.potd.data.PotdUiModel
+import com.pr.potd.ui.data.PotdUiModel
 import com.pr.potd.databinding.FragmentItemBinding
 
 
@@ -38,6 +37,7 @@ internal class FavoritesRecyclerViewAdapter(
         val descTv = binding.favoritesDescTv
         val dateTv = binding.favoritesDateTv
         val bgImgView = binding.backgroundImg
+        val favoriteButton = binding.favoriteButton
 
         fun bind(potdUiModel: PotdUiModel) {
             Glide.with(itemView.context)
@@ -48,6 +48,9 @@ internal class FavoritesRecyclerViewAdapter(
             headingTv.text = potdUiModel.title
             descTv.text = potdUiModel.explanation
             dateTv.text = potdUiModel.date
+            favoriteButton.setOnClickListener {
+                adapterInteractionListener.toggleFavorite(potdUiModel)
+            }
 
         }
     }

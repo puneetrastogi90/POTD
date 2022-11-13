@@ -1,4 +1,4 @@
-package com.pr.potd.dataobjects.entities
+package com.pr.potd.database.dataobjects.entities
 
 sealed class DatabaseResult<out T : Any, out U : Any> {
 

@@ -1,13 +1,14 @@
-package com.pr.potd.viewmodels
+package com.pr.potd.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pr.potd.data.PotdUiModel
-import com.pr.potd.dataobjects.entities.DatabaseResult
+import com.pr.potd.ui.data.PotdUiModel
+import com.pr.potd.database.dataobjects.entities.DatabaseResult
 import com.pr.potd.intent.MainIntent
 import com.pr.potd.network.data.Result
 import com.pr.potd.repositories.PotdRepository
 import com.pr.potd.state.MainState
+import com.pr.potd.utils.NETWORK_DATE_FORMAT
 import com.pr.potd.utils.convertMillisToDate
 import com.pr.potd.utils.toPotdUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,6 +28,8 @@ internal class MainViewmodel @Inject constructor(val potdRepository: PotdReposit
     val state: StateFlow<MainState>
         get() = _state
 
+    var potdUiModel: PotdUiModel? = null
+
     init {
         handleIntent()
     }
@@ -37,7 +40,7 @@ internal class MainViewmodel @Inject constructor(val potdRepository: PotdReposit
                 when (it) {
                     is MainIntent.FetchPictureOftheDay -> getPotd(
                         convertMillisToDate(
-                            "yyyy-MM-dd",
+                            NETWORK_DATE_FORMAT,
                             it.dateInMillis
                         )
                     )
@@ -47,12 +50,13 @@ internal class MainViewmodel @Inject constructor(val potdRepository: PotdReposit
         }
     }
 
-    private fun toggleFavorite(potdUiModel: PotdUiModel) {
+    private fun toggleFavorite(model: PotdUiModel) {
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = MainState.Loading
-            val response = potdRepository.updatePotd(potdUiModel.toPotdEntity())
+            val response = potdRepository.updatePotd(model.toPotdEntity())
             _state.value = when (response) {
                 is DatabaseResult.Success -> {
+                    potdUiModel = response.body!!.toPotdUiModel()
                     MainState.ToggleFavoriteSuccess(response.body?.toPotdUiModel()!!)
                 }
                 is DatabaseResult.DataBaseError -> {
@@ -69,7 +73,8 @@ internal class MainViewmodel @Inject constructor(val potdRepository: PotdReposit
             val response = potdRepository.getPOTD(date)
             _state.value = when (response) {
                 is Result.Success -> {
-                    MainState.FetchPotdSuccess(response.body?.toPotdUiModel()!!)
+                    potdUiModel = response.body!!.toPotdUiModel()
+                    MainState.FetchPotdSuccess(potdUiModel!!)
                 }
                 is Result.ApiError -> {
                     MainState.FetchPotdApiError(response.errorBody)

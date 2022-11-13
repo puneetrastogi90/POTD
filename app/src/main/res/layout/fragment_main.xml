@@ -8,7 +8,6 @@
     tools:context=".ui.MainActivity">
 
 
-
     <TextView
         android:id="@+id/selectDateLabel"
         android:layout_width="wrap_content"
@@ -64,11 +63,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    <Button
+    <ImageButton
         android:id="@+id/favoriteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="Favorite"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        android:src="@drawable/ic_fav"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

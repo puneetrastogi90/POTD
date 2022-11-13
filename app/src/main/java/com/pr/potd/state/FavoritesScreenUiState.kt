@@ -1,7 +1,6 @@
 package com.pr.potd.state
 
-import com.pr.potd.data.PotdUiModel
-import com.pr.potd.network.data.ErrorResponse
+import com.pr.potd.ui.data.PotdUiModel
 
 
 internal sealed class FavoritesScreenUiState {

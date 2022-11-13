@@ -1,6 +1,8 @@
-package com.pr.potd.data
+package com.pr.potd.ui.data
 
-import com.pr.potd.dataobjects.entities.PotdEntity
+import com.pr.potd.database.dataobjects.entities.PotdEntity
+import com.pr.potd.utils.UI_DATE_FORMAT
+import com.pr.potd.utils.convertDateToMillis
 
 internal data class PotdUiModel(
     val id: Int?,
@@ -14,7 +16,7 @@ internal data class PotdUiModel(
 
     fun toPotdEntity(): PotdEntity = PotdEntity(
         id = this.id,
-        date = this.date,
+        date = convertDateToMillis(UI_DATE_FORMAT, this.date),
         explanation = this.explanation,
         title = this.title,
         hdUrl = this.hdUrl,

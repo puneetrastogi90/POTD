@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pr.potd.data.PotdUiModel
+import com.pr.potd.ui.data.PotdUiModel
 import com.pr.potd.databinding.FragmentFavoritesListBinding
 import com.pr.potd.intent.FavoritesIntent
 import com.pr.potd.state.FavoritesScreenUiState
-import com.pr.potd.state.MainState
 import com.pr.potd.utils.displayProgressBar
 import com.pr.potd.utils.showToast
-import com.pr.potd.viewmodels.FavoritesListViewmodel
+import com.pr.potd.ui.viewmodels.FavoritesListViewmodel
+import com.pr.potd.ui.viewmodels.MainViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,7 +25,8 @@ import kotlinx.coroutines.launch
 internal class FavoritesListFragment : Fragment(), AdapterInteractionListener {
     private lateinit var binding: FragmentFavoritesListBinding
 
-    private val favoritesListViewmodel by viewModels<FavoritesListViewmodel>()
+    private val favoritesListViewmodel by activityViewModels<FavoritesListViewmodel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,7 +60,7 @@ internal class FavoritesListFragment : Fragment(), AdapterInteractionListener {
                     }
 
                     is FavoritesScreenUiState.ToggleFavoriteSuccess -> {
-                        //potdUiModel = it.potdUiModel
+                        getFavorites()
                         displayProgressBar(binding.progressbar, false)
                         showToast("Favorite toggled Successfully")
                     }
@@ -86,6 +88,9 @@ internal class FavoritesListFragment : Fragment(), AdapterInteractionListener {
     }
 
     override fun toggleFavorite(potdUiModel: PotdUiModel) {
-        TODO("Not yet implemented")
+        lifecycleScope.launch {
+            favoritesListViewmodel.favoritesIntent.send(FavoritesIntent.ToggleFavorite(potdUiModel))
+        }
+
     }
 }

@@ -1,8 +1,7 @@
 package com.pr.potd.repositories
 
-import com.pr.potd.dataobjects.entities.DatabaseResult
-import com.pr.potd.dataobjects.entities.PotdEntity
-import com.pr.potd.network.data.PotdResponse
+import com.pr.potd.database.dataobjects.entities.DatabaseResult
+import com.pr.potd.database.dataobjects.entities.PotdEntity
 import com.pr.potd.network.data.Result
 
 interface PotdRepository {

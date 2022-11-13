@@ -1,16 +1,12 @@
-package com.pr.potd.viewmodels
+package com.pr.potd.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pr.potd.data.PotdUiModel
-import com.pr.potd.dataobjects.entities.DatabaseResult
+import com.pr.potd.ui.data.PotdUiModel
+import com.pr.potd.database.dataobjects.entities.DatabaseResult
 import com.pr.potd.intent.FavoritesIntent
-import com.pr.potd.intent.MainIntent
-import com.pr.potd.network.data.Result
 import com.pr.potd.repositories.PotdRepository
 import com.pr.potd.state.FavoritesScreenUiState
-import com.pr.potd.state.MainState
-import com.pr.potd.utils.convertMillisToDate
 import com.pr.potd.utils.toPotdUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

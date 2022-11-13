@@ -5,9 +5,9 @@ import androidx.room.Room
 import com.google.gson.Gson
 import com.pr.potd.BuildConfig
 import com.pr.potd.database.PotdDatabase
-import com.pr.potd.dataobjects.PictureOfTheDayDao
-import com.pr.potd.local.LocalDataSource
-import com.pr.potd.local.RoomLocalDataSourceImpl
+import com.pr.potd.database.dataobjects.PictureOfTheDayDao
+import com.pr.potd.database.local.LocalDataSource
+import com.pr.potd.database.local.RoomLocalDataSourceImpl
 import com.pr.potd.network.*
 import com.pr.potd.repositories.PotdRepository
 import com.pr.potd.repositories.PotdRepositoryImpl

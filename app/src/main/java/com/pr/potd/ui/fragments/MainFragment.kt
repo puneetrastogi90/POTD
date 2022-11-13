@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -19,15 +19,14 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.pr.potd.R
-import com.pr.potd.data.PotdUiModel
+import com.pr.potd.ui.data.PotdUiModel
 import com.pr.potd.databinding.FragmentMainBinding
 import com.pr.potd.intent.MainIntent
 import com.pr.potd.state.MainState
-import com.pr.potd.utils.addFragment
-import com.pr.potd.utils.convertMillisToDate
+import com.pr.potd.utils.*
 import com.pr.potd.utils.displayProgressBar
 import com.pr.potd.utils.showToast
-import com.pr.potd.viewmodels.MainViewmodel
+import com.pr.potd.ui.viewmodels.MainViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -36,8 +35,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
-    private val mainViewmodel by viewModels<MainViewmodel>()
-    private lateinit var potdUiModel: PotdUiModel
+    private val mainViewmodel by activityViewModels<MainViewmodel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +51,13 @@ class MainFragment : Fragment() {
         }
         observeViewModel()
         return binding.root
+    }
+
+    override fun onResume() {
+        mainViewmodel.potdUiModel?.let {
+            updateUI(it)
+        }
+        super.onResume()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -101,7 +107,8 @@ class MainFragment : Fragment() {
                     }
 
                     is MainState.ToggleFavoriteSuccess -> {
-                        potdUiModel = it.potdUiModel
+                        binding.favoriteButton.isActivated =
+                            mainViewmodel.potdUiModel?.isFavorite == true
                         displayProgressBar(binding.progressbar, false)
                         showToast("Favorite toggled Successfully")
                     }
@@ -120,7 +127,6 @@ class MainFragment : Fragment() {
                 .build()
 
         datePicker.addOnPositiveButtonClickListener { millis ->
-            binding.dateEditText.text = convertMillisToDate("MM/dd/yyyy", millis)
             fetchPotd(millis)
         }
         datePicker.addOnCancelListener {
@@ -140,7 +146,13 @@ class MainFragment : Fragment() {
 
     private fun toggleFavorite() {
         lifecycleScope.launch {
-            mainViewmodel.mainIntent.send(MainIntent.ToggleFavorite(potdUiModel))
+            mainViewmodel.potdUiModel?.let {
+                mainViewmodel.mainIntent.send(
+                    MainIntent.ToggleFavorite(
+                        it
+                    )
+                )
+            }
         }
     }
 
@@ -149,7 +161,6 @@ class MainFragment : Fragment() {
     }
 
     private fun updateUI(result: PotdUiModel) {
-        potdUiModel = result
         val options: RequestOptions = RequestOptions()
             .centerCrop()
             .placeholder(R.drawable.image_loader_progress_animation)
@@ -187,6 +198,8 @@ class MainFragment : Fragment() {
         binding.tvTitle.text = result.title
         binding.tvExplanation.text = result.explanation
         binding.favoriteButton.visibility = View.VISIBLE
+        binding.favoriteButton.isActivated = result.isFavorite
+        binding.dateEditText.text = result.date
     }
 
 

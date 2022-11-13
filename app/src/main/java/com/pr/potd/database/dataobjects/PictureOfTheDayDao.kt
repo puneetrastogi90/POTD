@@ -1,7 +1,7 @@
-package com.pr.potd.dataobjects
+package com.pr.potd.database.dataobjects
 
 import androidx.room.*
-import com.pr.potd.dataobjects.entities.PotdEntity
+import com.pr.potd.database.dataobjects.entities.PotdEntity
 
 @Dao
 interface PictureOfTheDayDao {
@@ -10,7 +10,7 @@ interface PictureOfTheDayDao {
     fun insertPicture(potd: PotdEntity)
 
     @Query("Select * from pictures where date=:date")
-    fun getPictureOfTheDay(date: String): List<PotdEntity>
+    fun getPictureOfTheDay(date: Long): List<PotdEntity>
 
     @Query("Select * from pictures where isFavorite=1")
     fun getFavorites(): List<PotdEntity>

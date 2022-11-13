@@ -1,7 +1,7 @@
-package com.pr.potd.local
+package com.pr.potd.database.local
 
-import com.pr.potd.dataobjects.PictureOfTheDayDao
-import com.pr.potd.dataobjects.entities.PotdEntity
+import com.pr.potd.database.dataobjects.PictureOfTheDayDao
+import com.pr.potd.database.dataobjects.entities.PotdEntity
 import javax.inject.Inject
 
 class RoomLocalDataSourceImpl @Inject constructor(private val pictureOfTheDayDao: PictureOfTheDayDao) :
@@ -11,7 +11,7 @@ class RoomLocalDataSourceImpl @Inject constructor(private val pictureOfTheDayDao
         pictureOfTheDayDao.insertPicture(potdEntity)
     }
 
-    override fun getPictureOfTheDay(date: String): PotdEntity? {
+    override fun getPictureOfTheDay(date: Long): PotdEntity? {
         val picturesOfTheDay = pictureOfTheDayDao.getPictureOfTheDay(date)
         if (picturesOfTheDay.isNotEmpty())
             return picturesOfTheDay[0]

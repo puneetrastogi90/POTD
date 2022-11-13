@@ -1,14 +1,13 @@
-package com.pr.potd.dataobjects.entities
+package com.pr.potd.database.dataobjects.entities
 
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.pr.potd.network.data.PotdResponse
 
 @Entity(tableName = "pictures", indices = [Index(value = ["date"], unique = true)])
 data class PotdEntity(
     @PrimaryKey(autoGenerate = true) val id: Int? = null,
-    val date: String,
+    val date: Long,
     val explanation: String,
     val title: String,
     val hdUrl: String?,
