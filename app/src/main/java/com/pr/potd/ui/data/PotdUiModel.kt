@@ -1,6 +1,6 @@
 package com.pr.potd.ui.data
 
-import com.pr.potd.database.dataobjects.entities.PotdEntity
+import com.pr.localdb.entities.PotdEntity
 import com.pr.potd.utils.UI_DATE_FORMAT
 import com.pr.potd.utils.convertDateToMillis
 

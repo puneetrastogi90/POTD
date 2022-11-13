@@ -1,8 +1,8 @@
 package com.pr.potd.utils
 
 import android.text.format.DateFormat
+import com.pr.localdb.entities.PotdEntity
 import com.pr.potd.ui.data.PotdUiModel
-import com.pr.potd.database.dataobjects.entities.PotdEntity
 import com.pr.potd.network.data.PotdResponse
 import java.text.SimpleDateFormat
 import java.util.*

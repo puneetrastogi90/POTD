@@ -1,9 +1,10 @@
 package com.pr.potd.repositories
 
+import com.pr.localdb.LocalDataSource
+import com.pr.localdb.entities.DatabaseResult
+import com.pr.localdb.entities.PotdEntity
 import com.pr.network.NetworkDataSource
-import com.pr.potd.database.dataobjects.entities.DatabaseResult
-import com.pr.potd.database.dataobjects.entities.PotdEntity
-import com.pr.potd.database.local.LocalDataSource
+
 import com.pr.potd.network.data.Result
 import com.pr.potd.utils.NETWORK_DATE_FORMAT
 import com.pr.potd.utils.convertDateToMillis
@@ -21,9 +22,9 @@ class PotdRepositoryImpl @Inject constructor(
         when (result) {
             is Result.Success -> {
                 val potdEntity = result.body?.toPotdEntity()
-                potdEntity?.let {
-                    localDataSource.insertPictureOfTheDay(it)
-                    return Result.Success(localDataSource.getPictureOfTheDay(potdEntity?.date))
+                potdEntity?.let { pd: PotdEntity ->
+                    localDataSource.insertPictureOfTheDay(pd)
+                    return@let Result.Success(localDataSource.getPictureOfTheDay(potdEntity?.date))
                 }
 
                 return Result.Success(potdEntity)

@@ -2,8 +2,8 @@ package com.pr.potd.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pr.localdb.entities.DatabaseResult
 import com.pr.potd.ui.data.PotdUiModel
-import com.pr.potd.database.dataobjects.entities.DatabaseResult
 import com.pr.potd.intent.MainIntent
 import com.pr.potd.network.data.Result
 import com.pr.potd.repositories.PotdRepository
