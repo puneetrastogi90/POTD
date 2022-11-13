@@ -1,4 +1,4 @@
-package com.pr.potd.network
+package com.pr.network
 
 import android.util.Log
 import com.pr.potd.exceptions.NoInternetException

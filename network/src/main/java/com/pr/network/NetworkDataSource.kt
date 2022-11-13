@@ -1,4 +1,4 @@
-package com.pr.potd.network
+package com.pr.network
 
 import com.pr.potd.network.data.ErrorResponse
 import com.pr.potd.network.data.PotdResponse

@@ -1,4 +1,4 @@
-package com.pr.potd.network
+package com.pr.network
 
 
 import android.content.Context
@@ -8,6 +8,7 @@ import com.pr.potd.exceptions.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 class NetworkConnectionInterceptor(context: Context) : Interceptor {
 

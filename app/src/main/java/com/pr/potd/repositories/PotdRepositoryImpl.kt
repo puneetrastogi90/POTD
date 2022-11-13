@@ -1,9 +1,9 @@
 package com.pr.potd.repositories
 
+import com.pr.network.NetworkDataSource
 import com.pr.potd.database.dataobjects.entities.DatabaseResult
 import com.pr.potd.database.dataobjects.entities.PotdEntity
 import com.pr.potd.database.local.LocalDataSource
-import com.pr.potd.network.NetworkDataSource
 import com.pr.potd.network.data.Result
 import com.pr.potd.utils.NETWORK_DATE_FORMAT
 import com.pr.potd.utils.convertDateToMillis
